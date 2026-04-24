@@ -1,0 +1,20 @@
+name: 일일 사용량 리포트
+on:
+  schedule:
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+jobs:
+  daily-report:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Supabase 통계 → Slack
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+        run: |
+          YESTERDAY=$(date -d "yesterday" +%Y-%m-%d 2>/dev/null || date -v-1d +%Y-%m-%d)
+          RESPONSE=$(curl -s -H "apikey: $SUPABASE_KEY" -H "Authorization: Bearer $SUPABASE_KEY" "$SUPABASE_URL/rest/v1/analysis_logs?select=id,city,score_2026,gender&created_at=gte.$YESTERDAY")
+          TOTAL=$(echo $RESPONSE | python3 -c "import sys,json; d=json.load(sys.stdin); print(len(d))")
+          TOTAL_ALL=$(curl -s -H "apikey: $SUPABASE_KEY" -H "Authorization: Bearer $SUPABASE_KEY" -H "Prefer: count=exact" "$SUPABASE_URL/rest/v1/analysis_logs?select=id" -I | grep -i "content-range" | grep -o '[0-9]*$')
+          curl -X POST "$SLACK_WEBHOOK_URL" -H "Content-Type: application/json" -d "{\"text\":\"📊 운명 커리어 설계도 일일 리포트 ($YESTERDAY)\n전일: ${TOTAL}건 | 누적: ${TOTAL_ALL}건\"}"

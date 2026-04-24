@@ -1,0 +1,25 @@
+{
+  "name": "unmyung-career-seolgedo",
+  "version": "0.1.0",
+  "description": "명리·자미두수·점성술 통합 커리어 설계 보고서 서비스",
+  "license": "AGPL-3.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@orrery/core": "^0.4.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@vitejs/plugin-react": "^4.3.4",
+    "typescript": "^5.7.2",
+    "vite": "^6.0.5",
+    "wrangler": "^4.84.1"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"npm audit fix\",\"description\":\"Fix npm audit vulnerabilities\"}",
+  "error": "Exit code 1\n\nup to date, audited 129 packages in 3s\n\n15 packages are looking for funding\n  run `npm fund` for details\n\n# npm audit report\n\nesbuild  <=0.24.2\nSeverity: moderate\nesbuild enables any website to send any requests to the development server and read the response - https://github.com/advisories/GHSA-67mh-4wv8-2f99\nfix available via `npm audit fix --force`\nWill install wrangler@4.84.1, which is a breaking change\nnode_modules/wrangler/node_modules/esbuild\n  wrangler  <=4.24.3\n  Depends on...",
+  "timestamp": "2026-04-24T07:38:18.957Z",
+  "retry_count": 1
+}
