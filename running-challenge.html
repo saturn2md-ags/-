@@ -3,29 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-    <title>마라닉TV 30일 러닝 챌린지 🏃</title>
+    <title>마라닉TV 30일 러닝 챌린지</title>
     <style>
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
         :root {
-            --orange: #FF6B35;
-            --orange-dark: #E55424;
-            --gold: #FFD166;
-            --green: #2ECC71;
-            --blue: #74B9FF;
-            --stamp-red: rgba(204, 0, 0, 0.88);
-            --bg: #FFF9F6;
+            --yellow: #FFEB00;
+            --black: #111111;
             --white: #FFFFFF;
-            --text: #1C1C28;
+            --red: #E0001A;
+            --off-white: #F8F8F6;
+            --mid: #E2E2E2;
             --muted: #888;
-            --border: #F0EBE8;
-            --shadow: 0 4px 24px rgba(255,107,53,0.18);
+            --stamp-red: rgba(200, 0, 20, 0.9);
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
-            background: var(--bg);
-            color: var(--text);
+            background: var(--off-white);
+            color: var(--black);
             max-width: 480px;
             margin: 0 auto;
             min-height: 100vh;
@@ -33,380 +29,354 @@
 
         /* ── Hero ── */
         .hero {
-            background: linear-gradient(150deg, #FF6B35 0%, #FF8C42 55%, #FFB347 100%);
-            color: white;
-            padding: 36px 20px 52px;
-            text-align: center;
+            background: var(--yellow);
+            padding: 44px 28px 0;
             position: relative;
-            overflow: hidden;
         }
-        .hero::after {
-            content: '🏃';
-            position: absolute;
-            font-size: 130px;
-            opacity: 0.07;
-            right: -12px;
-            bottom: -24px;
-            transform: scaleX(-1);
+        .hero-label {
+            font-size: 0.7rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            color: var(--red);
+            text-transform: uppercase;
+            margin-bottom: 18px;
         }
-        .hero-emoji { font-size: 2.6rem; display: block; margin-bottom: 8px; }
-        .hero h1 { font-size: 1.5rem; font-weight: 900; line-height: 1.35; }
-        .hero p { font-size: 0.88rem; opacity: 0.9; margin-top: 8px; }
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 900;
+            line-height: 0.95;
+            color: var(--black);
+            letter-spacing: -2px;
+        }
+        .hero-title span {
+            display: block;
+        }
+        .hero-black-bar {
+            background: var(--black);
+            margin: 28px -28px 0;
+            padding: 18px 28px;
+        }
+        .hero-black-bar p {
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 700;
+            line-height: 1.5;
+        }
+        .hero-black-bar p em {
+            color: var(--yellow);
+            font-style: normal;
+        }
 
-        /* ── Progress Card ── */
-        .progress-card {
+        /* ── Stats ── */
+        .stats-section {
             background: var(--white);
-            margin: -28px 16px 0;
-            border-radius: 20px;
-            padding: 20px;
-            box-shadow: var(--shadow);
-            position: relative;
-            z-index: 10;
+            padding: 36px 28px 28px;
+            border-bottom: 3px solid var(--black);
         }
         .stats-row {
             display: flex;
-            justify-content: space-around;
-            margin-bottom: 18px;
+            gap: 0;
+            margin-bottom: 28px;
         }
-        .stat { text-align: center; }
+        .stat {
+            flex: 1;
+            padding-right: 20px;
+            border-right: 2px solid var(--mid);
+            margin-right: 20px;
+        }
+        .stat:last-child { border-right: none; margin-right: 0; padding-right: 0; }
         .stat-num {
-            font-size: 2.1rem;
+            font-size: 3rem;
             font-weight: 900;
-            color: var(--orange);
+            color: var(--black);
             line-height: 1;
+            letter-spacing: -2px;
         }
-        .stat-lbl { font-size: 0.7rem; color: var(--muted); margin-top: 4px; }
+        .stat-lbl {
+            font-size: 0.72rem;
+            font-weight: 700;
+            color: var(--muted);
+            margin-top: 6px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
         .pbar-wrap {
-            background: #F3EEE9;
-            border-radius: 99px;
-            height: 11px;
-            overflow: hidden;
+            height: 14px;
+            background: var(--mid);
         }
         .pbar {
             height: 100%;
-            background: linear-gradient(90deg, #FF6B35, #FFD166);
-            border-radius: 99px;
+            background: var(--black);
             transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-        .pbar::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(90deg, transparent 0%, rgba(255,255,255,0.35) 50%, transparent 100%);
-            animation: shimmer 2s infinite;
-        }
-        @keyframes shimmer {
-            from { transform: translateX(-100%); }
-            to { transform: translateX(200%); }
         }
         .pbar-labels {
             display: flex;
             justify-content: space-between;
             font-size: 0.72rem;
+            font-weight: 700;
             color: var(--muted);
-            margin-top: 6px;
+            margin-top: 10px;
         }
 
         /* ── Section header ── */
         .sec-header {
-            padding: 22px 16px 10px;
-            font-size: 0.92rem;
-            font-weight: 700;
-            color: var(--text);
+            padding: 36px 28px 18px;
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--black);
+            letter-spacing: -0.5px;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         /* ── Badge Row ── */
         .badge-row {
             display: flex;
-            gap: 10px;
-            padding: 0 16px 6px;
+            gap: 12px;
+            padding: 0 28px 8px;
             overflow-x: auto;
             scrollbar-width: none;
             -webkit-overflow-scrolling: touch;
         }
         .badge-row::-webkit-scrollbar { display: none; }
         .badge-item {
-            flex: 0 0 76px;
+            flex: 0 0 80px;
             background: var(--white);
-            border-radius: 16px;
-            padding: 14px 6px 11px;
+            border: 2.5px solid var(--mid);
+            padding: 16px 6px 13px;
             text-align: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.07);
-            transition: transform 0.2s;
+            transition: transform 0.15s;
         }
         .badge-item.unlocked {
-            background: linear-gradient(135deg, #FFFDE7, #FFE0B2);
-            border: 1.5px solid var(--gold);
+            background: var(--yellow);
+            border-color: var(--black);
         }
-        .badge-item.locked { opacity: 0.32; filter: grayscale(1); }
-        .badge-icon { font-size: 2rem; display: block; margin-bottom: 5px; }
-        .badge-name { font-size: 0.63rem; color: var(--muted); line-height: 1.4; }
-        .badge-item.unlocked .badge-name { color: #a07000; font-weight: 700; }
+        .badge-item.locked { opacity: 0.28; }
+        .badge-icon { font-size: 2rem; display: block; margin-bottom: 6px; }
+        .badge-name { font-size: 0.65rem; font-weight: 700; color: var(--black); line-height: 1.4; }
+        .badge-item.locked .badge-name { color: var(--muted); }
 
         /* ── Medal box ── */
         .medal-box {
             display: none;
-            margin: 12px 16px;
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-            border-radius: 22px;
-            padding: 28px 20px;
+            margin: 0 28px 8px;
+            background: var(--black);
+            padding: 36px 28px;
             text-align: center;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-        .medal-box::before {
-            content: '✨';
-            position: absolute;
-            font-size: 80px;
-            opacity: 0.06;
-            top: -10px;
-            left: -10px;
+            color: var(--white);
         }
         .medal-box.show {
             display: block;
             animation: medal-in 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
         }
         @keyframes medal-in {
-            from { transform: scale(0.5) translateY(-20px); opacity: 0; }
+            from { transform: scale(0.6) translateY(-20px); opacity: 0; }
             to   { transform: scale(1) translateY(0); opacity: 1; }
         }
         .medal-big {
-            font-size: 4.5rem;
+            font-size: 5rem;
             display: block;
-            margin-bottom: 10px;
-            animation: medal-bounce 1s ease-out 0.4s both;
+            margin-bottom: 16px;
+            animation: medal-bounce 0.9s ease-out 0.4s both;
         }
         @keyframes medal-bounce {
-            0%   { transform: scale(0) rotate(-20deg); }
-            60%  { transform: scale(1.2) rotate(5deg); }
-            80%  { transform: scale(0.95) rotate(-2deg); }
+            0%   { transform: scale(0) rotate(-15deg); }
+            55%  { transform: scale(1.18) rotate(4deg); }
+            80%  { transform: scale(0.94) rotate(-1deg); }
             100% { transform: scale(1) rotate(0); }
         }
-        .medal-title { font-size: 1.4rem; font-weight: 900; margin-bottom: 8px; }
-        .medal-sub { font-size: 0.88rem; opacity: 0.88; line-height: 1.65; }
+        .medal-title {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--yellow);
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+        }
+        .medal-sub {
+            font-size: 0.95rem;
+            line-height: 1.75;
+            opacity: 0.88;
+        }
 
         /* ── Week accordion ── */
-        .week-wrap { margin: 10px 16px; }
+        .week-wrap { margin: 0 0 3px; }
         .week-head {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 14px 16px;
+            background: var(--black);
+            padding: 20px 28px;
             display: flex;
             align-items: center;
             cursor: pointer;
-            transition: background 0.15s;
             -webkit-tap-highlight-color: transparent;
             user-select: none;
+            transition: opacity 0.15s;
         }
-        .week-head.open { border-radius: 16px 16px 0 0; }
-        .week-head:active { background: #FFF3EE; }
-        .week-icon { font-size: 1.4rem; margin-right: 10px; flex-shrink: 0; }
-        .week-title-text { font-weight: 800; font-size: 0.95rem; flex: 1; display: flex; align-items: center; gap: 6px; }
+        .week-head:active { opacity: 0.85; }
+        .week-icon { font-size: 1.3rem; margin-right: 12px; flex-shrink: 0; }
+        .week-title-text {
+            font-weight: 900;
+            font-size: 1.05rem;
+            color: var(--white);
+            flex: 1;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.3px;
+        }
         .week-done-tag {
             font-size: 0.62rem;
-            font-weight: 800;
-            background: linear-gradient(90deg, #FFD700, #FFA000);
-            color: white;
-            padding: 2px 8px;
-            border-radius: 99px;
+            font-weight: 900;
+            background: var(--yellow);
+            color: var(--black);
+            padding: 3px 9px;
+            letter-spacing: 0.5px;
             display: none;
         }
         .week-done-tag.show {
             display: inline-block;
-            animation: pop 0.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            animation: pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         @keyframes pop {
             0%   { transform: scale(0); }
-            65%  { transform: scale(1.18); }
+            65%  { transform: scale(1.15); }
             100% { transform: scale(1); }
         }
-        .week-prog { font-size: 0.78rem; color: var(--muted); margin-right: 8px; }
-        .chevron { color: var(--muted); font-size: 0.72rem; transition: transform 0.25s; }
+        .week-prog {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: rgba(255,255,255,0.55);
+            margin-right: 12px;
+        }
+        .chevron {
+            color: rgba(255,255,255,0.5);
+            font-size: 0.75rem;
+            transition: transform 0.25s;
+        }
         .chevron.open { transform: rotate(180deg); }
         .week-body {
             background: var(--white);
-            border-radius: 0 0 16px 16px;
-            overflow: hidden;
-            border-top: 1px solid var(--border);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.05);
+            border-left: 3px solid var(--black);
+            border-right: 3px solid var(--black);
         }
 
         /* ── Day card ── */
         .day-card {
             display: flex;
             align-items: center;
-            padding: 13px 16px;
-            gap: 12px;
-            border-bottom: 1px solid #F5F0ED;
+            padding: 20px 20px 20px 0;
+            gap: 16px;
+            border-bottom: 1.5px solid var(--mid);
             position: relative;
-            min-height: 72px;
-            transition: background 0.2s;
+            min-height: 84px;
+            border-left: 6px solid var(--black);
         }
+        .day-card.rest { border-left-color: var(--yellow); }
+        .day-card.done { background: #FFFEF0; }
+        .day-card.rest.done { background: #FFFEF0; }
         .day-card:last-child { border-bottom: none; }
-        .day-card.done { background: #F5FFF8; }
-        .day-card.rest { background: #F3F8FF; }
-        .day-card.rest.done { background: #EBF5FF; }
 
         .day-num {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
+            width: 40px;
+            height: 40px;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 800;
-            font-size: 0.85rem;
-            color: white;
+            font-weight: 900;
+            font-size: 0.9rem;
             flex-shrink: 0;
-            background: var(--orange);
+            margin-left: 16px;
         }
-        .day-card.rest .day-num { background: #5ba3e0; }
-        .day-card.done .day-num { background: #27ae60; }
 
         .day-info { flex: 1; min-width: 0; }
         .day-type {
-            font-size: 0.66rem;
-            font-weight: 700;
+            font-size: 0.68rem;
+            font-weight: 900;
             color: var(--muted);
-            letter-spacing: 0.4px;
-            margin-bottom: 3px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 5px;
         }
-        .day-workout { font-size: 0.84rem; line-height: 1.5; color: var(--text); }
+        .day-workout {
+            font-size: 0.92rem;
+            font-weight: 600;
+            line-height: 1.5;
+            color: var(--black);
+        }
 
         /* ── Button ── */
         .action-btn {
             flex-shrink: 0;
-            border: none;
-            border-radius: 10px;
-            padding: 9px 12px;
-            font-size: 0.76rem;
-            font-weight: 700;
+            border: 2.5px solid var(--black);
+            background: var(--black);
+            color: var(--white);
+            padding: 10px 14px;
+            font-size: 0.78rem;
+            font-weight: 900;
             cursor: pointer;
             font-family: inherit;
-            transition: all 0.15s;
-            color: white;
-            background: var(--orange);
+            transition: all 0.12s;
             white-space: nowrap;
             -webkit-tap-highlight-color: transparent;
+            letter-spacing: 0.3px;
+            margin-right: 20px;
         }
-        .action-btn.rest-btn { background: #5ba3e0; }
-        .action-btn:hover { opacity: 0.88; transform: scale(1.04); }
+        .action-btn.rest-btn {
+            background: var(--yellow);
+            color: var(--black);
+            border-color: var(--black);
+        }
+        .action-btn:hover { opacity: 0.8; }
         .action-btn:active { transform: scale(0.96); }
 
         /* ── Stamp ── */
         .stamp {
             flex-shrink: 0;
-            transform: rotate(-13deg);
+            transform: rotate(-12deg);
+            margin-right: 20px;
         }
         .stamp.fresh {
             animation: stamp-hit 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
         }
         @keyframes stamp-hit {
-            0%   { transform: rotate(-13deg) scale(2.4); opacity: 0; }
-            45%  { transform: rotate(-13deg) scale(0.86); opacity: 1; }
-            70%  { transform: rotate(-13deg) scale(1.08); }
-            100% { transform: rotate(-13deg) scale(1); opacity: 1; }
+            0%   { transform: rotate(-12deg) scale(2.5); opacity: 0; }
+            45%  { transform: rotate(-12deg) scale(0.85); opacity: 1; }
+            70%  { transform: rotate(-12deg) scale(1.1); }
+            100% { transform: rotate(-12deg) scale(1); opacity: 1; }
         }
         .stamp-body {
             border: 2.5px solid var(--stamp-red);
-            border-radius: 6px;
-            padding: 5px 9px;
+            padding: 6px 10px;
             position: relative;
             color: var(--stamp-red);
             text-align: center;
-            background: rgba(255,255,255,0.6);
+            background: rgba(255,255,255,0.7);
         }
         .stamp-body::before {
             content: '';
             position: absolute;
-            inset: 2.5px;
-            border: 1px solid rgba(204,0,0,0.22);
-            border-radius: 3px;
+            inset: 3px;
+            border: 1px solid rgba(200,0,20,0.2);
         }
-        .stamp-star { font-size: 1.05rem; line-height: 1.1; }
+        .stamp-star { font-size: 1.1rem; line-height: 1.1; }
         .stamp-text {
-            font-size: 0.58rem;
+            font-size: 0.6rem;
             font-weight: 900;
-            letter-spacing: 0.8px;
+            letter-spacing: 1px;
             line-height: 1.5;
             margin-top: 2px;
         }
 
-        /* ── Reset button ── */
-        .reset-section {
-            text-align: center;
-            padding: 20px 16px 8px;
+        /* ── Video section ── */
+        .videos-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            padding: 0 28px;
         }
-        .reset-btn {
-            background: none;
-            border: 1.5px solid #DDD;
-            border-radius: 99px;
-            padding: 8px 20px;
-            font-size: 0.78rem;
-            color: var(--muted);
-            cursor: pointer;
-            font-family: inherit;
-            transition: all 0.2s;
-        }
-        .reset-btn:hover { border-color: #FF6B35; color: #FF6B35; }
-
-        /* ── Toast ── */
-        .toast {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%) translateY(90px);
-            background: rgba(28, 28, 40, 0.93);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 99px;
-            font-size: 0.9rem;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            z-index: 1000;
-            transition: transform 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.3s;
-            opacity: 0;
-            white-space: nowrap;
-            pointer-events: none;
-        }
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
-
-        /* ── Confetti ── */
-        .confetti-layer {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 999;
-            overflow: hidden;
-        }
-        .cf {
-            position: absolute;
-            top: -20px;
-            animation: cf-drop linear forwards;
-            font-size: 14px;
-        }
-        @keyframes cf-drop {
-            to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
-        }
-
-        .spacer { height: 48px; }
-
-        /* ── Video Section ── */
         .video-card {
             background: var(--white);
-            border-radius: 16px;
+            border: 2.5px solid var(--black);
             overflow: hidden;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
         }
         .video-thumb-wrap {
             position: relative;
@@ -421,10 +391,10 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            opacity: 0.92;
+            opacity: 0.88;
             transition: opacity 0.2s;
         }
-        .video-thumb-wrap:hover img { opacity: 0.78; }
+        .video-thumb-wrap:hover img { opacity: 0.72; }
         .video-thumb-wrap iframe {
             position: absolute;
             inset: 0;
@@ -441,64 +411,126 @@
             pointer-events: none;
         }
         .play-btn-circle {
-            width: 56px;
-            height: 56px;
-            background: rgba(255,255,255,0.92);
-            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            background: var(--yellow);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
-            transition: transform 0.2s;
+            transition: transform 0.15s;
         }
-        .video-thumb-wrap:hover .play-btn-circle { transform: scale(1.1); }
+        .video-thumb-wrap:hover .play-btn-circle { transform: scale(1.08); }
         .play-arrow {
-            width: 0;
-            height: 0;
-            border-top: 11px solid transparent;
-            border-bottom: 11px solid transparent;
-            border-left: 19px solid #FF0000;
-            margin-left: 4px;
+            width: 0; height: 0;
+            border-top: 12px solid transparent;
+            border-bottom: 12px solid transparent;
+            border-left: 20px solid var(--black);
+            margin-left: 5px;
         }
-        .video-meta {
-            padding: 12px 14px 14px;
-        }
+        .video-meta { padding: 14px 16px 16px; }
         .video-label {
-            font-size: 0.68rem;
-            font-weight: 700;
-            color: var(--orange);
+            font-size: 0.66rem;
+            font-weight: 900;
+            color: var(--red);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
+            letter-spacing: 1.5px;
+            margin-bottom: 5px;
         }
         .video-title {
-            font-size: 0.88rem;
-            font-weight: 700;
-            color: var(--text);
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--black);
             line-height: 1.4;
         }
         .video-channel {
             font-size: 0.75rem;
             color: var(--muted);
-            margin-top: 3px;
+            margin-top: 4px;
+            font-weight: 600;
         }
-        .videos-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            padding: 0 16px;
+
+        /* ── Reset ── */
+        .reset-section {
+            text-align: center;
+            padding: 36px 28px 16px;
         }
+        .reset-btn {
+            background: none;
+            border: 2px solid var(--mid);
+            padding: 10px 24px;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--muted);
+            cursor: pointer;
+            font-family: inherit;
+            transition: all 0.15s;
+            letter-spacing: 0.3px;
+        }
+        .reset-btn:hover { border-color: var(--black); color: var(--black); }
+
+        /* ── Toast ── */
+        .toast {
+            position: fixed;
+            bottom: 32px;
+            left: 50%;
+            transform: translateX(-50%) translateY(90px);
+            background: var(--black);
+            color: var(--yellow);
+            padding: 13px 26px;
+            font-size: 0.92rem;
+            font-weight: 900;
+            z-index: 1000;
+            transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.25s;
+            opacity: 0;
+            white-space: nowrap;
+            pointer-events: none;
+            letter-spacing: 0.3px;
+        }
+        .toast.show {
+            transform: translateX(-50%) translateY(0);
+            opacity: 1;
+        }
+
+        /* ── Confetti ── */
+        .confetti-layer {
+            position: fixed; inset: 0;
+            pointer-events: none; z-index: 999;
+            overflow: hidden;
+        }
+        .cf {
+            position: absolute;
+            top: -20px;
+            animation: cf-drop linear forwards;
+        }
+        @keyframes cf-drop {
+            to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+        }
+
+        .weeks-container {
+            padding: 0 28px;
+        }
+
+        .spacer { height: 56px; }
     </style>
 </head>
 <body>
 
+<!-- Hero -->
 <div class="hero">
-    <span class="hero-emoji">🏃</span>
-    <h1>마라닉TV<br>30일 러닝 챌린지</h1>
-    <p>1분 달리기부터 쉬지 않고 30분 완주까지!</p>
+    <div class="hero-label">MARANIC PACE</div>
+    <div class="hero-title">
+        <span>30일</span>
+        <span>러닝</span>
+        <span>챌린지</span>
+    </div>
+    <div class="hero-black-bar">
+        <p>"오늘을 달리면, 내일이 달라집니다"<br>
+        <em>1분 달리기부터 쉬지 않고 30분 완주까지</em></p>
+    </div>
 </div>
 
-<div class="progress-card">
+<!-- Stats -->
+<div class="stats-section">
     <div class="stats-row">
         <div class="stat">
             <div class="stat-num" id="cnt-done">0</div>
@@ -517,40 +549,47 @@
         <div class="pbar" id="pbar" style="width:0%"></div>
     </div>
     <div class="pbar-labels">
-        <span>Day 1</span>
+        <span>DAY 1</span>
         <span id="pbar-label">0 / 30</span>
-        <span>완주! 🎉</span>
+        <span>완주 🎉</span>
     </div>
 </div>
 
-<div class="sec-header">🏅 주차별 배지</div>
+<!-- Badges -->
+<div class="sec-header">주차별 배지</div>
 <div class="badge-row" id="badge-row"></div>
 
+<!-- Medal -->
 <div class="medal-box" id="medal-box">
     <span class="medal-big">🥇</span>
-    <div class="medal-title">30일 완주 메달 획득!</div>
+    <div class="medal-title">30일 완주!</div>
     <div class="medal-sub">
-        진심으로 축하드립니다! 🎉<br>
+        진심으로 축하드립니다!<br>
         이제 쉬지 않고 30분을 달릴 수 있는<br>
-        진정한 러너가 되셨습니다!<br><br>
-        <strong>당신이 해냈습니다! 🏅</strong>
+        진정한 러너가 되셨습니다.<br><br>
+        당신이 해냈습니다 🏅
     </div>
 </div>
 
-<div id="weeks-root"></div>
+<!-- Weeks -->
+<div class="sec-header">훈련 일정</div>
+<div class="weeks-container">
+    <div id="weeks-root"></div>
+</div>
 
-<div class="sec-header">🎬 참고 영상</div>
+<!-- Videos -->
+<div class="sec-header">참고 영상</div>
 <div class="videos-grid">
 
     <div class="video-card">
         <div class="video-thumb-wrap" id="vt-1" onclick="loadVideo('vt-1', 'rOoYrqdCVc0')">
-            <img src="https://img.youtube.com/vi/rOoYrqdCVc0/hqdefault.jpg" alt="30일 러닝 프로그램 영상">
+            <img src="https://img.youtube.com/vi/rOoYrqdCVc0/hqdefault.jpg" alt="30일 러닝 프로그램">
             <div class="play-overlay">
                 <div class="play-btn-circle"><div class="play-arrow"></div></div>
             </div>
         </div>
         <div class="video-meta">
-            <div class="video-label">🏃 훈련 프로그램</div>
+            <div class="video-label">훈련 프로그램</div>
             <div class="video-title">30일 러닝 프로그램 영상</div>
             <div class="video-channel">마라닉TV</div>
         </div>
@@ -558,13 +597,13 @@
 
     <div class="video-card">
         <div class="video-thumb-wrap" id="vt-2" onclick="loadVideo('vt-2', '4P-fUsQ3T-c')">
-            <img src="https://img.youtube.com/vi/4P-fUsQ3T-c/hqdefault.jpg" alt="스트레칭 영상">
+            <img src="https://img.youtube.com/vi/4P-fUsQ3T-c/hqdefault.jpg" alt="스트레칭">
             <div class="play-overlay">
                 <div class="play-btn-circle"><div class="play-arrow"></div></div>
             </div>
         </div>
         <div class="video-meta">
-            <div class="video-label">🧘 스트레칭</div>
+            <div class="video-label">스트레칭</div>
             <div class="video-title">스트레칭 영상</div>
             <div class="video-channel">마라닉TV</div>
         </div>
@@ -573,17 +612,15 @@
 </div>
 
 <div class="reset-section">
-    <button class="reset-btn" onclick="resetAll()">🔄 처음부터 다시 시작</button>
+    <button class="reset-btn" onclick="resetAll()">↺ 처음부터 다시 시작</button>
 </div>
 
 <div class="spacer"></div>
-
 <div class="toast" id="toast"></div>
 <div class="confetti-layer" id="confetti-layer"></div>
 
 <script>
 const PROGRAM = [
-    // 1주차
     { day: 1,  week: 1, rest: false, workout: "3분 걷기 + 1분 달리기 → 30분 동안 반복" },
     { day: 2,  week: 1, rest: true,  workout: "휴식 및 스트레칭" },
     { day: 3,  week: 1, rest: false, workout: "3분 걷기 + 1분 30초 달리기 → 30분 동안 반복" },
@@ -591,7 +628,6 @@ const PROGRAM = [
     { day: 5,  week: 1, rest: false, workout: "3분 걷기 + 2분 달리기 → 30분 동안 반복" },
     { day: 6,  week: 1, rest: true,  workout: "휴식 및 스트레칭" },
     { day: 7,  week: 1, rest: false, workout: "2분 걷기 + 2분 달리기 → 30분 동안 반복" },
-    // 2주차
     { day: 8,  week: 2, rest: true,  workout: "휴식 및 스트레칭" },
     { day: 9,  week: 2, rest: false, workout: "2분 걷기 + 3분 달리기 → 30분 동안 반복" },
     { day: 10, week: 2, rest: true,  workout: "휴식 및 스트레칭" },
@@ -599,7 +635,6 @@ const PROGRAM = [
     { day: 12, week: 2, rest: true,  workout: "휴식 및 스트레칭" },
     { day: 13, week: 2, rest: false, workout: "1분 걷기 + 4분 달리기 → 30분 동안 반복" },
     { day: 14, week: 2, rest: true,  workout: "휴식 및 스트레칭" },
-    // 3주차
     { day: 15, week: 3, rest: false, workout: "(2분 걷기 + 5분 달리기) × 4번 반복" },
     { day: 16, week: 3, rest: true,  workout: "휴식 및 스트레칭" },
     { day: 17, week: 3, rest: false, workout: "(3분 걷기 + 7분 달리기) × 3번 반복" },
@@ -607,7 +642,6 @@ const PROGRAM = [
     { day: 19, week: 3, rest: false, workout: "(4분 걷기 + 10분 달리기) × 2번 → 마무리 2분 걷기" },
     { day: 20, week: 3, rest: true,  workout: "휴식 및 스트레칭" },
     { day: 21, week: 3, rest: false, workout: "(2분 걷기 + 13분 달리기) × 2번" },
-    // 4주차
     { day: 22, week: 4, rest: true,  workout: "휴식 및 스트레칭" },
     { day: 23, week: 4, rest: false, workout: "13분 달리기 → 2분 걷기 → 15분 달리기" },
     { day: 24, week: 4, rest: true,  workout: "휴식 및 스트레칭" },
@@ -615,7 +649,6 @@ const PROGRAM = [
     { day: 26, week: 4, rest: true,  workout: "휴식 및 스트레칭" },
     { day: 27, week: 4, rest: false, workout: "2분 30초 걷기 → 25분 달리기 → 2분 30초 걷기" },
     { day: 28, week: 4, rest: true,  workout: "휴식 및 스트레칭" },
-    // 5주차
     { day: 29, week: 5, rest: false, workout: "2분 30초 걷기 → 30분 달리기 → 2분 30초 걷기 🔥" },
     { day: 30, week: 5, rest: true,  workout: "휴식 및 스트레칭 🎊 수고하셨습니다!" },
 ];
@@ -657,8 +690,12 @@ function renderBadges() {
 function buildDayCard(d, animate) {
     const isDone = !!done[d.day];
     const cls = ['day-card', d.rest ? 'rest' : '', isDone ? 'done' : ''].filter(Boolean).join(' ');
-    const numBg = isDone ? '#27ae60' : d.rest ? '#5ba3e0' : 'var(--orange)';
-    const typeLabel = d.rest ? '🧘 휴식일' : '🏃 훈련일';
+    const numStyle = isDone
+        ? 'background:#111;color:#fff'
+        : d.rest
+        ? 'background:#FFEB00;color:#111;border:2px solid #111'
+        : 'background:#111;color:#fff';
+    const typeLabel = d.rest ? '휴식일' : '훈련일';
 
     let action;
     if (isDone) {
@@ -675,7 +712,7 @@ function buildDayCard(d, animate) {
     }
 
     return `<div class="${cls}" id="dc-${d.day}">
-        <div class="day-num" style="background:${numBg}">${d.day}</div>
+        <div class="day-num" style="${numStyle}">${d.day}</div>
         <div class="day-info">
             <div class="day-type">${typeLabel}</div>
             <div class="day-workout">${d.workout}</div>
@@ -719,7 +756,6 @@ function completeDay(dayNum) {
     done[dayNum] = true;
     save();
 
-    // Update only this card (keeps rest of DOM intact, stamp animates fresh)
     const card = document.getElementById('dc-' + dayNum);
     if (card) card.outerHTML = buildDayCard(d, true);
 
@@ -760,7 +796,7 @@ function syncWeekHeader(w) {
 }
 
 function resetAll() {
-    if (!confirm('정말로 처음부터 다시 시작하시겠어요? 모든 기록이 삭제됩니다.')) return;
+    if (!confirm('처음부터 다시 시작하시겠어요? 모든 기록이 삭제됩니다.')) return;
     done = {};
     save();
     document.getElementById('medal-box').classList.remove('show');
@@ -768,7 +804,7 @@ function resetAll() {
     renderBadges();
     openWeeks = new Set([1]);
     renderWeeks();
-    showToast('🔄 처음부터 다시 시작합니다!');
+    showToast('↺ 처음부터 다시 시작!');
 }
 
 function loadVideo(wrapperId, videoId) {
@@ -791,8 +827,8 @@ function showToast(msg) {
 
 function launchConfetti() {
     const wrap = document.getElementById('confetti-layer');
-    const COLORS = ['#FF6B35','#FFD166','#06D6A0','#118AB2','#EF476F','#FFD700','#A8EDEA','#FEA0C8'];
-    const SHAPES = ['●','■','▲','★','♥','✦','◆'];
+    const COLORS = ['#FFEB00','#E0001A','#111111','#ffffff','#FFD700','#ff6600'];
+    const SHAPES = ['●','■','▲','★','◆','▪'];
     for (let i = 0; i < 100; i++) {
         setTimeout(() => {
             const el = document.createElement('div');
@@ -800,30 +836,24 @@ function launchConfetti() {
             el.style.cssText = `
                 left: ${Math.random() * 100}vw;
                 color: ${COLORS[~~(Math.random() * COLORS.length)]};
-                font-size: ${Math.random() * 12 + 7}px;
-                animation-duration: ${Math.random() * 2.5 + 2.2}s;
-                animation-delay: ${Math.random() * 0.6}s;
+                font-size: ${Math.random() * 14 + 8}px;
+                animation-duration: ${Math.random() * 2.5 + 2}s;
+                animation-delay: ${Math.random() * 0.5}s;
             `;
             el.textContent = SHAPES[~~(Math.random() * SHAPES.length)];
             wrap.appendChild(el);
-            setTimeout(() => el.remove(), 4800);
+            setTimeout(() => el.remove(), 4500);
         }, i * 35);
     }
 }
 
-// ── Init ──
 (function init() {
     updateStats();
     renderBadges();
-
-    // Auto-open the first incomplete week (or last if all done)
     const firstIncomplete = WEEKS.find(w => !isWeekDone(w));
     openWeeks = new Set([firstIncomplete ?? 5]);
     renderWeeks();
-
-    if (totalDone() === 30) {
-        document.getElementById('medal-box').classList.add('show');
-    }
+    if (totalDone() === 30) document.getElementById('medal-box').classList.add('show');
 })();
 </script>
 </body>
