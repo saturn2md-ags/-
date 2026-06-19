@@ -698,9 +698,7 @@ function renderBadges() {
 function buildDayCard(d, animate) {
     const isDone = !!done[d.day];
     const cls = ['day-card', d.rest ? 'rest' : '', isDone ? 'done' : ''].filter(Boolean).join(' ');
-    const numStyle = isDone
-        ? 'background:#111;color:#fff'
-        : d.rest
+    const numStyle = d.rest
         ? 'background:#FFEB00;color:#111;border:2px solid #111'
         : 'background:#111;color:#fff';
     const typeLabel = d.rest ? '휴식일' : '훈련일';
