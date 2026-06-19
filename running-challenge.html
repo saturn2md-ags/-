@@ -335,6 +335,8 @@
         .stamp {
             flex-shrink: 0;
             transform: rotate(-12deg);
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent;
         }
         .stamp.fresh {
             animation: stamp-hit 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
@@ -345,27 +347,31 @@
             70%  { transform: rotate(-12deg) scale(1.1); }
             100% { transform: rotate(-12deg) scale(1); opacity: 1; }
         }
+        .stamp:hover .stamp-body { border-color: #bbb; }
         .stamp-body {
-            border: 2.5px solid var(--stamp-red);
-            padding: 6px 10px;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            border: 3px solid #aaa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.75);
             position: relative;
-            color: var(--stamp-red);
-            text-align: center;
-            background: rgba(255,255,255,0.7);
+            transition: border-color 0.15s;
         }
         .stamp-body::before {
             content: '';
             position: absolute;
-            inset: 3px;
-            border: 1px solid rgba(200,0,20,0.2);
+            inset: 4px;
+            border-radius: 50%;
+            border: 1px solid rgba(150,150,150,0.35);
         }
-        .stamp-star { font-size: 1.1rem; line-height: 1.1; }
         .stamp-text {
-            font-size: 0.6rem;
+            font-size: 0.78rem;
             font-weight: 900;
-            letter-spacing: 1px;
-            line-height: 1.5;
-            margin-top: 2px;
+            color: #999;
+            letter-spacing: 0.5px;
         }
 
         /* ── Video section ── */
@@ -701,10 +707,9 @@ function buildDayCard(d, animate) {
 
     let action;
     if (isDone) {
-        action = `<div class="stamp${animate ? ' fresh' : ''}">
+        action = `<div class="stamp${animate ? ' fresh' : ''}" onclick="cancelDay(${d.day})">
             <div class="stamp-body">
-                <div class="stamp-star">⭐</div>
-                <div class="stamp-text">참잘<br>했어요</div>
+                <div class="stamp-text">달성</div>
             </div>
         </div>`;
     } else {
@@ -781,6 +786,27 @@ function completeDay(dayNum) {
             setTimeout(() => showToast('🥇 30일 완주 메달 획득!'), 500);
         }, 700);
     }
+}
+
+function cancelDay(dayNum) {
+    if (!confirm(`Day ${dayNum} 달성을 취소하시겠어요?`)) return;
+    const d = PROGRAM.find(x => x.day === dayNum);
+    if (!d) return;
+
+    const wasWeekDone = isWeekDone(d.week);
+    delete done[dayNum];
+    save();
+
+    const card = document.getElementById('dc-' + dayNum);
+    if (card) card.outerHTML = buildDayCard(d, false);
+
+    updateStats();
+    syncWeekHeader(d.week);
+
+    if (wasWeekDone && !isWeekDone(d.week)) renderBadges();
+    if (totalDone() < 30) document.getElementById('medal-box').classList.remove('show');
+
+    showToast('↩ 달성 취소됨');
 }
 
 function syncWeekHeader(w) {
