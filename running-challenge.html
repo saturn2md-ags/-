@@ -268,62 +268,58 @@
         .day-card {
             display: flex;
             align-items: center;
-            padding: 20px 20px 20px 0;
-            gap: 16px;
+            padding: 12px 14px;
+            gap: 10px;
             border-bottom: 1.5px solid var(--mid);
             position: relative;
-            min-height: 84px;
-            border-left: 6px solid var(--black);
+            min-height: 56px;
         }
-        .day-card.rest { border-left-color: var(--yellow); }
         .day-card.done { background: #FFFEF0; }
         .day-card.rest.done { background: #FFFEF0; }
         .day-card:last-child { border-bottom: none; }
 
         .day-num {
-            width: 40px;
-            height: 40px;
+            width: 30px;
+            height: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
-            font-size: 0.9rem;
+            font-size: 0.78rem;
             flex-shrink: 0;
-            margin-left: 16px;
         }
 
         .day-info { flex: 1; min-width: 0; }
         .day-type {
-            font-size: 0.68rem;
+            font-size: 0.6rem;
             font-weight: 900;
             color: var(--muted);
-            letter-spacing: 1px;
+            letter-spacing: 0.8px;
             text-transform: uppercase;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
         }
         .day-workout {
-            font-size: 0.92rem;
+            font-size: 0.82rem;
             font-weight: 600;
-            line-height: 1.5;
+            line-height: 1.35;
             color: var(--black);
         }
 
         /* ── Button ── */
         .action-btn {
             flex-shrink: 0;
-            border: 2.5px solid var(--black);
+            border: 2px solid var(--black);
             background: var(--black);
             color: var(--white);
-            padding: 10px 14px;
-            font-size: 0.78rem;
+            padding: 8px 11px;
+            font-size: 0.72rem;
             font-weight: 900;
             cursor: pointer;
             font-family: inherit;
             transition: all 0.12s;
             white-space: nowrap;
             -webkit-tap-highlight-color: transparent;
-            letter-spacing: 0.3px;
-            margin-right: 20px;
+            letter-spacing: 0.2px;
         }
         .action-btn.rest-btn {
             background: var(--yellow);
@@ -337,7 +333,6 @@
         .stamp {
             flex-shrink: 0;
             transform: rotate(-12deg);
-            margin-right: 20px;
         }
         .stamp.fresh {
             animation: stamp-hit 0.38s cubic-bezier(0.175, 0.885, 0.32, 1.275) both;
