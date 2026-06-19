@@ -400,6 +400,94 @@
         }
 
         .spacer { height: 48px; }
+
+        /* ── Video Section ── */
+        .video-card {
+            background: var(--white);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+        }
+        .video-thumb-wrap {
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            cursor: pointer;
+            background: #000;
+        }
+        .video-thumb-wrap img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.92;
+            transition: opacity 0.2s;
+        }
+        .video-thumb-wrap:hover img { opacity: 0.78; }
+        .video-thumb-wrap iframe {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        .play-overlay {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            pointer-events: none;
+        }
+        .play-btn-circle {
+            width: 56px;
+            height: 56px;
+            background: rgba(255,255,255,0.92);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+            transition: transform 0.2s;
+        }
+        .video-thumb-wrap:hover .play-btn-circle { transform: scale(1.1); }
+        .play-arrow {
+            width: 0;
+            height: 0;
+            border-top: 11px solid transparent;
+            border-bottom: 11px solid transparent;
+            border-left: 19px solid #FF0000;
+            margin-left: 4px;
+        }
+        .video-meta {
+            padding: 12px 14px 14px;
+        }
+        .video-label {
+            font-size: 0.68rem;
+            font-weight: 700;
+            color: var(--orange);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
+        }
+        .video-title {
+            font-size: 0.88rem;
+            font-weight: 700;
+            color: var(--text);
+            line-height: 1.4;
+        }
+        .video-channel {
+            font-size: 0.75rem;
+            color: var(--muted);
+            margin-top: 3px;
+        }
+        .videos-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            padding: 0 16px;
+        }
     </style>
 </head>
 <body>
@@ -450,6 +538,39 @@
 </div>
 
 <div id="weeks-root"></div>
+
+<div class="sec-header">🎬 참고 영상</div>
+<div class="videos-grid">
+
+    <div class="video-card">
+        <div class="video-thumb-wrap" id="vt-1" onclick="loadVideo('vt-1', 'rOoYrqdCVc0')">
+            <img src="https://img.youtube.com/vi/rOoYrqdCVc0/hqdefault.jpg" alt="30일 러닝 프로그램 영상">
+            <div class="play-overlay">
+                <div class="play-btn-circle"><div class="play-arrow"></div></div>
+            </div>
+        </div>
+        <div class="video-meta">
+            <div class="video-label">🏃 훈련 프로그램</div>
+            <div class="video-title">30일 러닝 프로그램 영상</div>
+            <div class="video-channel">마라닉TV</div>
+        </div>
+    </div>
+
+    <div class="video-card">
+        <div class="video-thumb-wrap" id="vt-2" onclick="loadVideo('vt-2', '4P-fUsQ3T-c')">
+            <img src="https://img.youtube.com/vi/4P-fUsQ3T-c/hqdefault.jpg" alt="스트레칭 영상">
+            <div class="play-overlay">
+                <div class="play-btn-circle"><div class="play-arrow"></div></div>
+            </div>
+        </div>
+        <div class="video-meta">
+            <div class="video-label">🧘 스트레칭</div>
+            <div class="video-title">스트레칭 영상</div>
+            <div class="video-channel">마라닉TV</div>
+        </div>
+    </div>
+
+</div>
 
 <div class="reset-section">
     <button class="reset-btn" onclick="resetAll()">🔄 처음부터 다시 시작</button>
@@ -648,6 +769,15 @@ function resetAll() {
     openWeeks = new Set([1]);
     renderWeeks();
     showToast('🔄 처음부터 다시 시작합니다!');
+}
+
+function loadVideo(wrapperId, videoId) {
+    const wrap = document.getElementById(wrapperId);
+    if (!wrap) return;
+    wrap.innerHTML = `<iframe
+        src="https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>`;
 }
 
 let toastTimer = null;
