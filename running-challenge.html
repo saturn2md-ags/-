@@ -92,6 +92,11 @@
             line-height: 1;
             letter-spacing: -2px;
         }
+        .pct-unit {
+            font-size: 0.5em;
+            font-weight: 900;
+            vertical-align: middle;
+        }
         .stat-lbl {
             font-size: 0.72rem;
             font-weight: 700;
@@ -671,7 +676,7 @@ function updateStats() {
     const n = totalDone();
     const pct = Math.round(n / 30 * 100);
     document.getElementById('cnt-done').textContent = n;
-    document.getElementById('cnt-pct').textContent = pct + '%';
+    document.getElementById('cnt-pct').innerHTML = pct + '<span class="pct-unit">%</span>';
     document.getElementById('cnt-left').textContent = 30 - n;
     document.getElementById('pbar').style.width = pct + '%';
     document.getElementById('pbar-label').textContent = n + ' / 30';
